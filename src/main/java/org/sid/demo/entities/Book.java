@@ -18,9 +18,11 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String book_name;
+    private String name;
     private String Author;
     private LocalDate date_entree;
     private Boolean disponiblity;
+//    private Category category;
     private String photoName;
+    private String description;
 }

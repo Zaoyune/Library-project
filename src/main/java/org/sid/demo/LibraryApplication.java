@@ -3,15 +3,18 @@ package org.sid.demo;
 import org.sid.demo.Repositories.AffectationRepository;
 import org.sid.demo.Repositories.BookRepository;
 import org.sid.demo.Repositories.ReservationRepository;
-import org.sid.demo.Repositories.Services.service;
-import org.sid.demo.Repositories.Services.serviceIMP;
 import org.sid.demo.Repositories.StudentRepository;
-import org.sid.demo.entities.Student;
+import org.sid.demo.Services.serviceIMP;
+import org.sid.demo.entities.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class LibraryApplication {
@@ -26,13 +29,21 @@ public class LibraryApplication {
     private AffectationRepository affectationRepository ;
     @Autowired
     private ReservationRepository reservationRepository;
+    @Autowired
+    private RepositoryRestConfiguration repositoryRestConfiguration;
     public static void main(String[] args) {
         SpringApplication.run(LibraryApplication.class, args);
+    }
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
     CommandLineRunner start(){
+        repositoryRestConfiguration.exposeIdsFor(Book.class);
         return args -> {
+
             service.initBook();
             service.initStudent();
             service.initAffectation();

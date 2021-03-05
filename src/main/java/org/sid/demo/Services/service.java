@@ -1,7 +1,7 @@
-package org.sid.demo.Repositories.Services;
+package org.sid.demo.Services;
 
 public interface service {
-    public void initStudent();
+    void initStudent();
     void initBook();
     void initReservation();
     void initAffectation();

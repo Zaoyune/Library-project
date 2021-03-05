@@ -1,15 +1,13 @@
-package org.sid.demo.Repositories.Services;
+package org.sid.demo.Services;
 
 import net.bytebuddy.utility.RandomString;
 import org.sid.demo.Repositories.AffectationRepository;
 import org.sid.demo.Repositories.BookRepository;
 import org.sid.demo.Repositories.ReservationRepository;
 import org.sid.demo.Repositories.StudentRepository;
-import org.sid.demo.entities.Affectation;
-import org.sid.demo.entities.Book;
-import org.sid.demo.entities.Reservation;
-import org.sid.demo.entities.Student;
+import org.sid.demo.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,7 +15,7 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
-public class serviceIMP implements service {
+public class    serviceIMP implements service {
 
     @Autowired
     StudentRepository studentRepository;
@@ -31,12 +29,15 @@ public class serviceIMP implements service {
     @Autowired
     private AffectationRepository affectationRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder ;
+
     @Override
     public void initStudent() {
         Random random = new Random();
 
         for (int i = 0; i < 5; i++) {
-            Student student = new Student(null, RandomString.make(10), RandomString.make(10), RandomString.make(5), RandomString.make(5), RandomString.make(15));
+            Student student = new Student(null, "user"+i, RandomString.make(10), RandomString.make(5), RandomString.make(5), RandomString.make(15),passwordEncoder.encode("1234"),"user");
             studentRepository.save(student);
         }
 
@@ -46,7 +47,7 @@ public class serviceIMP implements service {
     public void initBook() {
         Random random = new Random();
         for (int i = 0; i < 20; i++) {
-            Book book = new Book(null, RandomString.make(10), RandomString.make(12), LocalDate.now(), random.nextBoolean(),"default.jpg");
+            Book book = new Book(null, RandomString.make(10), RandomString.make(12), LocalDate.now(), random.nextBoolean(),"default.png",null);
             bookRepository.save(book);
         }
     }
