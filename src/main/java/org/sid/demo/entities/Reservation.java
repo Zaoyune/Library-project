@@ -15,9 +15,16 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private LocalDate date_res;
+
     @ManyToOne
     private Book book;
+
     @ManyToOne
     private Student student;
+
+    private LocalDate date_limit;
+
+    private Boolean confirmed ;
 }

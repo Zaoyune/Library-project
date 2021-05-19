@@ -22,17 +22,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //http.csrf().disable();//cross site request forgery
+        //;//cross site request forgery
         //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         //http.formLogin();
         //http.headers().frameOptions().disable();
         //http.httpBasic();
 
+        http.csrf().disable();
         http.cors();
         http.httpBasic();
-        //http.csrf().disable();//cross site request forgery
-       //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/login/**").permitAll();
+        http.authorizeRequests().antMatchers("/login/**","/photoBook/**","/bookss/**","/getBook/**").permitAll();
+        http.authorizeRequests().anyRequest().authenticated();
 
         //http.authorizeRequests().antMatchers(HttpMethod.GET, "/books/**").hasAuthority("user");
         //http.authorizeRequests().anyRequest().authenticated();

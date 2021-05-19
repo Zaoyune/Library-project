@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
@@ -24,5 +21,8 @@ public class Book {
     private Boolean disponiblity;
 //    private Category category;
     private String photoName;
+    @Column(length = 100000)
     private String description;
+    private String category ;
+
 }

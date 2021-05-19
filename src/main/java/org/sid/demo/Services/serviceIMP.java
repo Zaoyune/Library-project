@@ -40,14 +40,15 @@ public class    serviceIMP implements service {
             Student student = new Student(null, "user"+i, RandomString.make(10), RandomString.make(5), RandomString.make(5), RandomString.make(15),passwordEncoder.encode("1234"),"user");
             studentRepository.save(student);
         }
-
+        Student student = new Student(null, "admin", RandomString.make(10), RandomString.make(5), RandomString.make(5), RandomString.make(15),passwordEncoder.encode("admin"),"admin");
+        studentRepository.save(student);
     }
 
     @Override
     public void initBook() {
         Random random = new Random();
         for (int i = 0; i < 20; i++) {
-            Book book = new Book(null, RandomString.make(10), RandomString.make(12), LocalDate.now(), random.nextBoolean(),"default.png",null);
+            Book book = new Book(null, RandomString.make(10), RandomString.make(12), LocalDate.now(), random.nextBoolean(),"test.png",RandomString.make(50),RandomString.make(12));
             bookRepository.save(book);
         }
     }
@@ -61,7 +62,7 @@ public class    serviceIMP implements service {
         long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
         LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
         for (int i = 0; i < 20; i++) {
-            Reservation reserv = new Reservation(null, randomDate,null,null);
+            Reservation reserv = new Reservation(null, randomDate,null,null,null,false);
             reservationRepository.save(reserv);
         }
     }
